@@ -2,8 +2,8 @@
 
 ## **Introduction**
 
-[Minsc](https://github.com/shesek/minsc) is a powerful tool for Bitcoin scripting, developed by [Shesek](https://github.com/shesek/). 
-You can do many amazing things with Minsc, like [CTV-based Vault](https://min.sc/v0.3/#github=examples/ctv-vault.minsc) and [HTLC](https://min.sc/v0.3/#github=examples/htlc.minsc). 
+[Minsc](https://github.com/shesek/minsc) is a powerful tool for Bitcoin scripting, developed by [Shesek](https://github.com/shesek/).\ 
+You can do many amazing things with Minsc, like [CTV-based Vault](https://min.sc/v0.3/#github=examples/ctv-vault.minsc) and [HTLC](https://min.sc/v0.3/#github=examples/htlc.minsc). \
 In this guide we will see how to check transaction details and compute  sighash using Minsc. \
 \
 We will use two simplified minsc templates for [p2wpkh](https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce) and [p2wsh](https://min.sc/v0.3/#gist=f677ffb2aec20eee0da9d64417695d4e)
