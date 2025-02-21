@@ -1,2 +1,4 @@
 # bitcoin-notes
-notes about bitcoin
+My notes about bitcoin
+
+[Transaction Info and Sighash Using Minsc](minsc.md)
