@@ -199,7 +199,7 @@ $signature = 0x3044022006fb261e2eb52c2adc7495123b868dac3ff6623eb5753ef34f3ddd360
 
 ## **8. Full Template Example (p2wsh)**
 
-
+Template: [p2wsh](https://min.sc/v0.3/#gist=f677ffb2aec20eee0da9d64417695d4e)
 
 ```
 // template for signet p2wsh
