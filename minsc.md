@@ -5,11 +5,14 @@
 [Minsc](https://github.com/shesek/minsc) is a powerful tool for Bitcoin scripting, developed by [Shesek](https://github.com/shesek/).\
 You can do some really cool things with Minsc, like [CTV-based Vault](https://min.sc/v0.3/#github=examples/ctv-vault.minsc) and [HTLC](https://min.sc/v0.3/#github=examples/htlc.minsc).\
 In this guide we will use Minsc to check transaction details and compute sighash.\
-\
-We will use two simplified Minsc templates for [p2wpkh](https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce) and [p2wsh](https://min.sc/v0.3/#gist=f677ffb2aec20eee0da9d64417695d4e).
 
 
-Use Minsc for **testnet only!**
+We'll explore two simplified Minsc templates:
+
+[P2WPKH template](https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce) - For basic Pay-to-Witness-Public-Key-Hash transactions
+[P2WSH template](https://min.sc/v0.3/#gist=f677ffb2aec20eee0da9d64417695d4e) - For more complex Pay-to-Witness-Script-Hash transactions
+
+Important: This guide uses testnet/signet examples only. Never use mainnet private keys in Minsc templates.
 
 ---
 
@@ -108,6 +111,7 @@ Sign the transaction hash using the derived private key:
 ```minsc
 $signature = ecdsa::sign($tprv/84h/1h/0h/0/$derivationIndex, $sighash) + SIGHASH_ALL;
 ```
+- Note that bitcoin signature are not deterministic, therefor your signature will be different.
 
 ---
 
