@@ -23,7 +23,7 @@ Open p2wpkh template in the browser:
 
 [https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce](https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce)
 
-Declare your private key:
+Declare private key:
 
 ```minsc
 $tprv = tprv8ZgxMBicQKsPe2ueBRfzTzgpt7gnRZdwo4rEPKsLmmpGHQxZscNKv45nsgfohcoWgturdL3c2J7FakV8adSk3huTA1RSWJEXFukwkJWF3gC;
@@ -31,14 +31,14 @@ $tprv = tprv8ZgxMBicQKsPe2ueBRfzTzgpt7gnRZdwo4rEPKsLmmpGHQxZscNKv45nsgfohcoWgtur
 
 ###
 
-Your bip32 key derivation index:
+Declare bip32 key derivation index:
 
 ```
 $derivationIndex = 0;
 ```
 
 \
-Your output address:
+Declare output address:
 
 ```
 $outputAddr = tb1qwtcm09rg8eez7ep0x4tkqkrtasa0mytufw7xzz;
@@ -55,7 +55,7 @@ $amount = 0.85208938 BTC;
 * We can use [mempool.space api](https://mempool.space/signet/api/tx/138462fe0acc6ff1b6aefaf61b4c92db04fc340ad6b56eaee6b67e812e07ba57) to get the amount and address of your output.
 
 \
-We will add an assert to ensure that your derived address matches the expected output. This step is crucial because it verifies that the private key derivation is correct and aligns with the expected output address, preventing potential errors when signing transactions. Note the derivation path is `84h/1h/0h/0/derivationIndex`, adjust it to your needs.
+We will add an assert to ensure that the derived address matches the expected output. This step is crucial because it verifies that the private key derivation is correct and aligns with the expected output address, preventing potential errors when signing transactions. Note the derivation path is `84h/1h/0h/0/derivationIndex`, we can adjust it to our needs.
 
 ```minsc
 assert::eq(address(wpkh($tprv/84h/1h/0h/0/$derivationIndex)), $outputAddr);
@@ -71,13 +71,13 @@ Define the transaction using the `tx()` function.
 $tx = tx(0x020000000001012dbbe91eceb76830221374c1a0d0080fc88f01ad2cc121b07bb06b0a27cb3abff200000000ffffffff0240420f0000000000220020e2f55cdc156913d6fc86f4ab684d54c113a1ad04d7cdec2f8f706a5bc64edc78d5a27b00000000001600147022f7802b1c8f495b191e014849a217de3235f802483045022100a905549b19b5ef3563bda630d3050aa318d56dd7101ce647eff5bba3b7d947660220213c1c9890410374a6271bc69e48e94ea4ea4f6bd8cdfc375d29c9239edf7f930121039c66ff2131622270d5eee20cd45fac7457912b16704d1cd17156957771c18a1400000000);
 ```
 
-This represents your raw Bitcoin transaction.
+This represents the raw Bitcoin transaction.
 
 ---
 
 ## **3. Remove Witness Data**
 
-Since signatures cover transaction data without witnesses, create a witness-stripped transaction:
+Since signatures cover transaction data without witnesses, we create a witness-stripped transaction:
 
 ```minsc
 $tx_no_witness = tx::with_witness($tx, [ 0: [] ]);
@@ -87,13 +87,13 @@ $tx_no_witness = tx::with_witness($tx, [ 0: [] ]);
 
 ## **4. Compute the Sighash**
 
-The sighash is a hash of the transaction data that must be signed. Compute it using:
+The sighash is a hash of the transaction data that must be signed. Let compute it using:
 
 ```minsc
 $sighash = tx::sighash($tx_no_witness, 0, [ $outputAddr:$amount ], SIGHASH_ALL);
 ```
 
-This command:
+Sighash command:
 
 - Targets input index `0`.
 - Uses the given output address and amount.
