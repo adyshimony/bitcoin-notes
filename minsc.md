@@ -217,8 +217,8 @@ $pk2 = bytes(derived(pubkey($tprv/84h/1h/0h/0/1)));
 $sighash = tx::sighash($tx_no_witness, 0, [ wsh(`2 $pk1 $pk2 2 OP_CHECKMULTISIG`):$amount], SIGHASH_ALL);
 ```
 
-- This template version is simplfied for learning purpose, and misses the signature part. 
-If you need that, check out the official example:\
+- This template version is simplfied for learning purposes, and misses the signature part. 
+If needed, check out the official example:\
   [https://min.sc/v0.3/#github=examples/multisig-simple.minsc](https://min.sc/v0.3/#github=examples/multisig-simple.minsc)
 
 
