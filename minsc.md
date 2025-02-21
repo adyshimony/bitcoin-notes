@@ -3,7 +3,6 @@
 ## **Introduction**
 
 [Minsc](https://github.com/shesek/minsc) is a powerful tool for Bitcoin scripting, developed by [Shesek](https://github.com/shesek/).
-\ 
 You can do many amazing things with Minsc, like [CTV-based Vault](https://min.sc/v0.3/#github=examples/ctv-vault.minsc) and [HTLC](https://min.sc/v0.3/#github=examples/htlc.minsc).
 \
 In this guide we will see how to check transaction details and compute  sighash using Minsc.\
@@ -17,7 +16,7 @@ Use Minsc for **testnet only!**
 
 ## **1. Set Up Your Variables**
 
-Define your private key and output details. We can use any form of key, but in our example we will use an extended private key. 
+We will define private key and output details. We can use any form of key, but in our example we will use an extended private key. 
 
 
 
