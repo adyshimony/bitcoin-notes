@@ -147,7 +147,7 @@ $signature = ecdsa::sign($tprv/84h/1h/0h/0/$derivationIndex, $sighash) + SIGHASH
 
 ## **7. Expected Output (p2wpkh)**
 
-```json
+```
 // Defined variables:
 
 $tprv = tprv8ZgxMBicQKsPe2ueBRfzTzgpt7gnRZdwo4rEPKsLmmpGHQxZscNKv45nsgfohcoWgturdL3c2J7FakV8adSk3huTA1RSWJEXFukwkJWF3gC // seckey
@@ -188,7 +188,7 @@ $sighash = 0xdf2bbe5674893a76cfcd86d7099e680105250feabf031301e64cc4523d56ce1f //
 $signature = 0x3044022006fb261e2eb52c2adc7495123b868dac3ff6623eb5753ef34f3ddd3600c8423002201da932213cb2dd037ac787a461a6042dbb9f8287526f95874f6dad6c9611501c01 // bytes
 ```
 
-```json
+```
 
 
 ```
