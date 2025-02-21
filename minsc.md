@@ -9,8 +9,8 @@ In this guide we will use Minsc to check transaction details and compute sighash
 
 We'll explore two simplified Minsc templates:
 
-[P2WPKH template](https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce) - For basic Pay-to-Witness-Public-Key-Hash transactions
-[P2WSH template](https://min.sc/v0.3/#gist=f677ffb2aec20eee0da9d64417695d4e) - For more complex Pay-to-Witness-Script-Hash transactions
+[P2WPKH template](https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce) - For basic Pay-to-Witness-Public-Key-Hash transactions.\
+[P2WSH template](https://min.sc/v0.3/#gist=f677ffb2aec20eee0da9d64417695d4e) - For more complex Pay-to-Witness-Script-Hash transactions.\
 
 Important: This guide uses testnet/signet examples only. Never use mainnet private keys in Minsc templates.
 
