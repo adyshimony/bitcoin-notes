@@ -111,7 +111,7 @@ $signature = ecdsa::sign($tprv/84h/1h/0h/0/$derivationIndex, $sighash) + SIGHASH
 
 ---
 
-## **6. Full Template Example (p2wpkh)**
+## **6. Full Template Example ([p2wpkh](https://min.sc/v0.3/#gist=4f3a74b78978ea2a650b96f5a72352ce))**
 
 ```minsc
 // template for signet p2wpkh
