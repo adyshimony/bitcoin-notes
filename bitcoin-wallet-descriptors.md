@@ -11,7 +11,25 @@ Before descriptors, wallets relied on implicit assumptions that were often uncle
 2. All information needed to detect and spend from these addresses
 3. A standardized format that different wallets can understand
 
-## Part 1: Descriptor Fundamentals
+### Why do we need descriptors?
+
+Descriptors serve several important practical purposes in the Bitcoin ecosystem:
+
+1. **Wallet Import/Export**: Descriptors can be imported into compatible wallets (like Bitcoin Core) to recreate the exact same wallet structure across different devices or applications.
+
+2. **Watch-only Wallets**: You can import a descriptor containing only public keys to create a watch-only wallet that can monitor balances and transactions without the ability to spend funds.
+
+3. **Hardware Wallet Integration**: Descriptors allow software wallets to communicate precisely with hardware wallets about which addresses to generate and monitor.
+
+4. **Multi-wallet Coordination**: In multi-signature setups, descriptors ensure all participants are watching the same set of addresses.
+
+5. **Wallet Recovery**: By storing your wallet descriptor securely, you can recover your entire wallet structure even if your original wallet software or device is lost.
+
+6. **Blockchain Scanning**: Descriptors can be used with commands like `scantxoutset` to quickly find funds associated with your keys without importing them to your wallet.
+
+7. **Automated Systems**: Services that generate addresses for users (like exchanges or payment processors) can use descriptors to systematically manage large numbers of addresses.
+
+## Descriptor Fundamentals
 
 ### Basic Descriptor Syntax
 
@@ -100,7 +118,7 @@ Bitcoin Core implements descriptors through the `descriptor.cpp` and related fil
 4. Monitor for incoming transactions matching descriptors
 5. Sign transactions using the appropriate script formats
 
-## Part 2: Derivation Paths in Depth
+## Derivation Paths in Depth
 
 ### BIP32 Derivation Path Structure
 
@@ -276,7 +294,7 @@ wpkh([73c5da0a/84h/0h/0h]xpub6CcGh8BQPxr9zssX4eG8CiGzToU6Y9b3f2s2wNw65p9xtr8ySL6
 - Allows defining both receiving and change address chains in a single descriptor
 - Particularly useful in wallet software that needs to track both chains
 
-## Part 3: Practical Usage Guide
+## Practical Usage Guide
 
 ### Calculating Descriptor Checksums
 
@@ -374,7 +392,7 @@ bitcoin-cli -rpcwallet=desc_wallet importdescriptors '[
 ]'
 ```
 
-## Part 4: Advanced Topics
+## Complex Descriptor Examples
 
 ### Miniscript and Policy
 
