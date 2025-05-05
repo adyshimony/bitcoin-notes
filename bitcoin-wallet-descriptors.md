@@ -108,15 +108,7 @@ When you see a descriptor like `pkh(02c6047f9441ed7d6d3045406e95c07cd85c778e4b8c
 3. **Exchange Deposits**: Exchanges may use single-key descriptors for user deposit addresses
 4. **Simple Wallet Recovery**: Recovering funds when you have the public key but need to specify the exact script type
 
-### Descriptor Implementation in Bitcoin Core
 
-Bitcoin Core implements descriptors through the `descriptor.cpp` and related files. The parser and evaluation logic allow Bitcoin Core to:
-
-1. Parse descriptors from string format
-2. Generate addresses from descriptors
-3. Create scriptPubKeys for transactions
-4. Monitor for incoming transactions matching descriptors
-5. Sign transactions using the appropriate script formats
 
 ## Derivation Paths in Depth
 
