@@ -384,7 +384,6 @@ bitcoin-cli -rpcwallet=desc_wallet importdescriptors '[
 ]'
 ```
 
-## Complex Descriptor Examples
 
 ### Miniscript and Policy
 
@@ -400,92 +399,6 @@ This allows spending either:
 - With 2-of-3 signatures from the primary keys, OR
 - With a signature from the backup key after 1000 blocks
 
-### Descriptor Templates
-
-For wallet implementations, it's common to use descriptor templates. For example, a wallet might support:
-
-```javascript
-function createWalletDescriptors(xpub, walletType) {
-  switch(walletType) {
-    case 'legacy':
-      return {
-        external: `pkh(${xpub}/0/*)`,
-        internal: `pkh(${xpub}/1/*)`
-      };
-    case 'segwit':
-      return {
-        external: `wpkh(${xpub}/0/*)`,
-        internal: `wpkh(${xpub}/1/*)`
-      };
-    // etc.
-  }
-}
-```
 
 
-### Hardware Wallet Integration
-
-When integrating a hardware wallet with Bitcoin Core:
-
-```bash
-# Get xpub from Trezor for account 0
-xpub=$(trezorctl get-public-node -n "m/84'/0'/0'" | grep xpub | awk '{print $2}')
-
-# Generate receiving descriptor
-receiving_desc=$(bitcoin-cli getdescriptorinfo "wpkh([trezor/84h/0h/0h]$xpub/0/*)" | jq -r '.descriptor')
-
-# Generate change descriptor
-change_desc=$(bitcoin-cli getdescriptorinfo "wpkh([trezor/84h/0h/0h]$xpub/1/*)" | jq -r '.descriptor')
-
-# Import both to Bitcoin Core
-bitcoin-cli -rpcwallet=trezor_watch importdescriptors "[
-  {\"desc\": \"$receiving_desc\", \"timestamp\": \"now\", \"range\": [0, 100], \"internal\": false},
-  {\"desc\": \"$change_desc\", \"timestamp\": \"now\", \"range\": [0, 100], \"internal\": true}
-]"
-```
-
-### Multisignature Wallet Setup
-
-Setting up a 2-of-3 multisig wallet with Bitcoin Core:
-
-```bash
-# Create three wallets for key generation
-for i in 1 2 3; do
-  bitcoin-cli createwallet "key$i" true false "" false false false
-done
-
-# Get an xpub from each wallet
-xpub1=$(bitcoin-cli -rpcwallet=key1 getnewaddress "" "bech32" | bitcoin-cli -rpcwallet=key1 getaddressinfo | jq -r '.desc' | sed 's/^wpkh(\[\w\+\]//;s:/0/0).*::')
-xpub2=$(bitcoin-cli -rpcwallet=key2 getnewaddress "" "bech32" | bitcoin-cli -rpcwallet=key2 getaddressinfo | jq -r '.desc' | sed 's/^wpkh(\[\w\+\]//;s:/0/0).*::')
-xpub3=$(bitcoin-cli -rpcwallet=key3 getnewaddress "" "bech32" | bitcoin-cli -rpcwallet=key3 getaddressinfo | jq -r '.desc' | sed 's/^wpkh(\[\w\+\]//;s:/0/0).*::')
-
-# Create multisig descriptor
-multisig_desc="wsh(multi(2,$xpub1/0/*,$xpub2/0/*,$xpub3/0/*))"
-change_desc="wsh(multi(2,$xpub1/1/*,$xpub2/1/*,$xpub3/1/*))"
-
-# Get checksums
-recv_desc=$(bitcoin-cli getdescriptorinfo "$multisig_desc" | jq -r '.descriptor')
-chg_desc=$(bitcoin-cli getdescriptorinfo "$change_desc" | jq -r '.descriptor')
-
-# Create and import to multisig wallet
-bitcoin-cli createwallet "multisig" true true "" false true true
-bitcoin-cli -rpcwallet=multisig importdescriptors "[
-  {\"desc\": \"$recv_desc\", \"timestamp\": \"now\", \"range\": [0, 100], \"internal\": false},
-  {\"desc\": \"$chg_desc\", \"timestamp\": \"now\", \"range\": [0, 100], \"internal\": true}
-]"
-```
-
-### Working with Private Keys in Descriptors
-
-For wallets with private keys, you can use WIF format or xprv:
-
-```
-# Legacy private key wallet
-pkh(5KYZdUEo39z3FPrtuX2QbbwGnNP5zTd7yyr2SC1j299sBCnWjss)
-
-# HD wallet with private key
-wpkh(xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi/84h/0h/0h/0/*)
-```
-
-Note: Never share descriptors containing private keys!
 
